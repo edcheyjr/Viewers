@@ -33,6 +33,8 @@ function Header({
   leftSideItems,
   showPatientInfo = PatientInfoVisibility.VISIBLE_COLLAPSED,
   servicesManager,
+  rightSideItems,
+  leftSideItems,
   ...props
 }: PropType): ReactNode {
   const { t } = useTranslation('Header');
@@ -47,9 +49,14 @@ function Header({
 
   return (
     <NavBar
-      isSticky={isSticky ?? false}
+      isSticky={isSticky ?? false ?? false}
       {...props}
     >
+      <div className="flex justify-between flex-1">
+        {/* left side of the Header */}
+        <div className="flex items-center">
+          {/* // TODO: Should preserve filter/sort
+              // Either injected service? Or context (like react router's `useLocation`?) */}
       <div className="flex justify-between flex-1">
         {/* left side of the Header */}
         <div className="flex items-center">
