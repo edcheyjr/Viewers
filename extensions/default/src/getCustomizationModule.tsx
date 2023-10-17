@@ -13,7 +13,10 @@ import { GoogleCloudDataSourceConfigurationAPI } from './DataSourceConfiguration
  * custom page for the user to view their profile, or to add a custom
  * page for login etc.
  */
-export default function getCustomizationModule({ servicesManager, extensionManager }) {
+export default function getCustomizationModule({
+  servicesManager,
+  extensionManager,
+}) {
   return [
     {
       name: 'helloPage',
@@ -22,7 +25,9 @@ export default function getCustomizationModule({ servicesManager, extensionManag
         routes: [
           {
             path: '/custom',
-            children: () => <h1 style={{ color: 'white' }}>Hello Custom Route</h1>,
+            children: () => (
+              <h1 style={{ color: 'white' }}>Hello Custom Route</h1>
+            ),
           },
         ],
       },
@@ -83,7 +88,7 @@ export default function getCustomizationModule({ servicesManager, extensionManag
          */
         {
           id: 'ohif.overlayItem',
-          content: function (props) {
+          content: function(props) {
             if (this.condition && !this.condition(props)) {
               return null;
             }
@@ -105,7 +110,9 @@ export default function getCustomizationModule({ servicesManager, extensionManag
                 style={{ color: this.color || undefined }}
                 title={this.title || ''}
               >
-                {this.label && <span className="mr-1 shrink-0">{this.label}</span>}
+                {this.label && (
+                  <span className="mr-1 shrink-0">{this.label}</span>
+                )}
                 <span className="font-light">{value}</span>
               </span>
             );
@@ -119,11 +126,10 @@ export default function getCustomizationModule({ servicesManager, extensionManag
            * This function clones the object and child objects to prevent
            * changes to the original customization object.
            */
-          transform: function (customizationService: CustomizationService) {
+          transform: function(customizationService: CustomizationService) {
             // Don't modify the children, as those are copied by reference
             const clonedObject = { ...this };
             clonedObject.menus = this.menus.map(menu => ({ ...menu }));
-
             for (const menu of clonedObject.menus) {
               const { items: originalItems } = menu;
               menu.items = [];
@@ -134,27 +140,116 @@ export default function getCustomizationModule({ servicesManager, extensionManag
             return clonedObject;
           },
         },
-
+        //TODO: Add Example of customizing worklist here left and right
         {
-          // the generic GUI component to configure a data source using an instance of a BaseDataSourceConfigurationAPI
-          id: 'ohif.dataSourceConfigurationComponent',
-          component: DataSourceConfigurationComponent.bind(null, {
-            servicesManager,
-            extensionManager,
-          }),
-        },
-
-        {
-          // The factory for creating an instance of a BaseDataSourceConfigurationAPI for Google Cloud Healthcare
-          id: 'ohif.dataSourceConfigurationAPI.google',
-          factory: (dataSourceName: string) =>
-            new GoogleCloudDataSourceConfigurationAPI(
-              dataSourceName,
-              servicesManager,
-              extensionManager
-            ),
+          name: 'worlList',
+          value: {
+            id: 'worklistComponent',
+            left: {
+              id: 'left',
+              uiType: 'uiType',
+              content: function() {
+                // if (this.condition && !this.condition(props)) return null;
+                // const { instance } = props;
+                // const value =
+                //   instance && this.attribute
+                //     ? instance[this.attribute]
+                //     : this.contentF && typeof this.contentF === 'function'
+                //     ? this.contentF(props)
+                //     : null;
+                // if (!value) return null;
+                return (
+                  <span
+                    className="overlay-item flex flex-row"
+                    style={{ color: 'gold' }}
+                    title={this.title || 'header'}
+                  >
+                    LEFT HEADER CUSTOM
+                  </span>
+                );
+              },
+            },
+            right: {
+              id: 'right',
+              uiType: 'uiType',
+              content: function() {
+                // if (this.condition && !this.condition(props)) return null;
+                // const { instance } = props;
+                // const value =
+                //   instance && this.attribute
+                //     ? instance[this.attribute]
+                //     : this.contentF && typeof this.contentF === 'function'
+                //     ? this.contentF(props)
+                //     : null;
+                // if (!value) return null;
+                return (
+                  <span
+                    className="overlay-item flex flex-row"
+                    style={{ color: 'gold' }}
+                    title={this.title || 'header'}
+                  >
+                    RIGHT HEADER CUSTOM
+                  </span>
+                );
+              },
+            },
+          },
         },
       ],
+    },
+    {
+      name: 'workList',
+      value: {
+        id: 'worklistComponent',
+        left: {
+          id: 'left',
+          uiType: 'uiType',
+          content: function() {
+            // if (this.condition && !this.condition(props)) return null;
+            // const { instance } = props;
+            // const value =
+            //   instance && this.attribute
+            //     ? instance[this.attribute]
+            //     : this.contentF && typeof this.contentF === 'function'
+            //     ? this.contentF(props)
+            //     : null;
+            // if (!value) return null;
+            return (
+              <span
+                className="overlay-item flex flex-row"
+                style={{ color: 'gold' }}
+                title={this.title || 'header'}
+              >
+                LEFT HEADER CUSTOM
+              </span>
+            );
+          },
+        },
+        right: {
+          id: 'right',
+          uiType: 'uiType',
+          content: function() {
+            // if (this.condition && !this.condition(props)) return null;
+            // const { instance } = props;
+            // const value =
+            //   instance && this.attribute
+            //     ? instance[this.attribute]
+            //     : this.contentF && typeof this.contentF === 'function'
+            //     ? this.contentF(props)
+            //     : null;
+            // if (!value) return null;
+            return (
+              <span
+                className="overlay-item flex flex-row"
+                style={{ color: 'gold' }}
+                title={this.title || 'header'}
+              >
+                RIGHT HEADER CUSTOM
+              </span>
+            );
+          },
+        },
+      },
     },
   ];
 }
