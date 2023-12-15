@@ -395,7 +395,7 @@ function WorkList({
                       onClick={() => {}}
                       data-cy={`mode-${mode.routeName}-${studyInstanceUid}`}
                     >
-                      {t(`Modes:${mode.displayName}`)}
+                      {mode.displayName}
                     </LegacyButton>
                   </Link>
                 )
