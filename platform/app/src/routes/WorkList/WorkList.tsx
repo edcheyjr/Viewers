@@ -26,6 +26,7 @@ import {
   UserPreferences,
   LoadingIndicatorProgress,
   useSessionStorage,
+  InvestigationalUseDialog,
   Button,
   ButtonEnums,
 } from '@ohif/ui';
@@ -558,6 +559,7 @@ function WorkList({
         // }
         WhiteLabeling={appConfig.whiteLabeling}
       />
+      <InvestigationalUseDialog dialogConfiguration={appConfig?.investigationalUseDialog} />
       <div className="ohif-scrollbar flex grow flex-col overflow-y-auto">
         <StudyListFilter
           numOfStudies={pageNumber * resultsPerPage > 100 ? 101 : numOfStudies}
