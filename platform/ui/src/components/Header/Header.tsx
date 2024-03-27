@@ -43,8 +43,8 @@ function Header({
 
   return (
     <NavBar
-      className="justify-between border-b-4 border-black"
       isSticky={isSticky ?? false}
+      {...props}
     >
       <div className="flex justify-between flex-1">
         {/* left side of the Header */}

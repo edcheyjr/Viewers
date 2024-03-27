@@ -98,8 +98,8 @@ export default function getCustomizationModule({
               instance && this.attribute
                 ? instance[this.attribute]
                 : this.contentF && typeof this.contentF === 'function'
-                ? this.contentF(props)
-                : null;
+                  ? this.contentF(props)
+                  : null;
             if (!value) {
               return null;
             }
