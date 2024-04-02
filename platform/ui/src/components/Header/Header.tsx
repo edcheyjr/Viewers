@@ -19,6 +19,8 @@ type PropType = {
   rightSideItems?: ReactNode;
   leftSideItems?: ReactNode;
 };
+import HeaderPatientInfo from '../HeaderPatientInfo';
+import { PatientInfoVisibility } from '../../types/PatientInfoVisibility';
 
 function Header({
   children,
@@ -29,6 +31,8 @@ function Header({
   WhiteLabeling,
   rightSideItems,
   leftSideItems,
+  showPatientInfo = PatientInfoVisibility.VISIBLE_COLLAPSED,
+  servicesManager,
   ...props
 }: PropType): ReactNode {
   const { t } = useTranslation('Header');
